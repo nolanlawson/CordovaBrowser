@@ -1,0 +1,26 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>Cordova</title>
+<script type="text/javascript" charset="utf-8" src="cordova-1.8.0.js"></script>
+<script>
+	document.addEventListener('deviceready', function() {
+		if (window.localStorage.lastUrl)
+			document.getElementById('url').value = window.localStorage.cordovaBrowserLastUrl;
+	});
+
+	function loadExternalUrl() {
+		var url = document.getElementById('url').value;
+		if (url.indexOf('http') !== 0) {
+			url = 'http://' + url;
+		}
+		window.localStorage.cordovaBrowserLastUrl = url;
+		window.location.href = url;
+	}
+</script>
+</head>
+<body>
+	<input type="text" id='url' placeholder="enter url" />
+	<button onclick="loadExternalUrl()">go</button>
+</body>
+</html>
