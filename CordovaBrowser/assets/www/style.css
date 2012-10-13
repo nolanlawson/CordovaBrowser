@@ -1,0 +1,34 @@
+* {
+    -webkit-backface-visibility: hidden;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-user-select: none;
+}
+
+input {
+    -webkit-user-select: auto;
+}
+
+#content {
+    overflow-x: hidden;
+}
+
+.androidButton {
+    box-sizing: border-box;
+    background: #eeeeee;
+    border: none;
+    font-size: 1.5em;
+    height: 2em;
+    margin-bottom: 1px;
+}
+
+.androidButtonDown {
+    background: #35b5dc;
+}
+
+.androidDeleteButton {
+    background: red;
+}
+
+.androidDeleteButton.androidButtonDown {
+    background: maroon;
+}
