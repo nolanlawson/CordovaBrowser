@@ -74,7 +74,13 @@ LoaderApp.prototype = {
         this.transitioner.slideListItemDown(this.urlView, item);
     },
     gotoUrl: function(url){
+<<<<<<< HEAD
         window.open(url);
+=======
+    	cordova.exec(function(winParam) {}, function(error) {}, "Loader",
+                "load", [url]);
+        //window.open(url);
+>>>>>>> v. 2
     },
     deleteItem: function(item){
         var index = item.index();

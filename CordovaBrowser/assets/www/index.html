@@ -23,12 +23,9 @@
     <script src="LoaderApp.js"></script>
 
     <title>Cordova Browser</title>
-    <script type="text/javascript" charset="utf-8" src="cordova-2.0.0.js"></script>
+    <script type="text/javascript" charset="utf-8" src="cordova-2.1.0.js"></script>
     <script>
         document.addEventListener('deviceready', function() {
-            if (window.launched)
-                return;
-            window.isCordova = true;
             window.launch();
         });
 
@@ -38,16 +35,6 @@
             $(document.body).height('100%');
             new LoaderApp();
         }
-
-        window.addEventListener('load', function(){
-            setTimeout(function(){
-                if (!window.isCordova){
-                    window.isCordova = false;
-                    window.launched = true;
-                    window.launch();
-                }
-            }, 250);
-        });
     </script>
 </head>
 <body>
