@@ -23,7 +23,8 @@ public class CordovaBrowserActivity extends DroidGap {
 		String defaultUrl = "file:///android_asset/www/index.html";
 		String url = getUrlFromIntent(getIntent(), defaultUrl);
 		super.loadUrl(url);
-
+		super.appView.clearCache(false);
+		
 	}
 	
 
@@ -44,8 +45,12 @@ public class CordovaBrowserActivity extends DroidGap {
 	
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		if (item.getItemId() == R.id.refresh){
+		if (item.getItemId() == R.id.home){
 			super.loadUrl("file:///android_asset/www/index.html");
+		}
+		else if (item.getItemId() == R.id.refresh){
+			super.appView.clearCache(false);
+			super.appView.reload();
 		}
 	    return true;
 	}
