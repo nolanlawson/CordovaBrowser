@@ -14,6 +14,7 @@ input {
 
 .androidButton {
     box-sizing: border-box;
+    -webkit-box-sizing: border-box;
     background: #eeeeee;
     border: none;
     font-size: 1.5em;

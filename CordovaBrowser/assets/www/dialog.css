@@ -1,5 +1,6 @@
 .dialog {
     box-sizing: border-box;
+    -webkit-box-sizing: border-box;
     position: fixed;
     width: 100%;
     left: 0;

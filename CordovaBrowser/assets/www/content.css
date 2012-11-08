@@ -24,6 +24,7 @@
 
 #settingsButtons {
     box-sizing: border-box;
+    -webkit-box-sizing: border-box;
     width: 100%;
     padding: .5em;
 }

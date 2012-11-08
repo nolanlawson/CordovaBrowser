@@ -1,5 +1,6 @@
 #header {
     box-sizing: border-box;
+    -webkit-box-sizing: border-box;
     background: #dddddd;
     height: 2.5em;
     position: fixed;
@@ -33,6 +34,7 @@
 
 .headerButton {
     box-sizing: border-box;
+    -webkit-box-sizing: border-box;
     height: 2.5em;
     background: #dddddd;
     border: none;
