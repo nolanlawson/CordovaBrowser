@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.eas.cordova.browser"
-    android:versionCode="5"
+    android:versionCode="6"
     android:versionName="2.1.0" >
 
     <uses-sdk android:minSdkVersion="8" />
@@ -34,7 +34,7 @@
         android:label="@string/app_name" >
         <activity
             android:name=".CordovaBrowserActivity"
-            android:label="@string/app_name" >
+            android:label="@string/app_name"  android:configChanges="orientation|keyboardHidden">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
