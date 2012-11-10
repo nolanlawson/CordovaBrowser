@@ -7,10 +7,11 @@ LoaderApp.prototype = {
     setup: function(){
         this.transitioner = new Transitioner();
         this.savedHistory = new SavedHistory();
-        this.appendUrlDialog = new AppendUrlDialog(this.transitioner);
+        this.createUrlDialog = new CreateUrlDialog(this.transitioner);
         this.settingsView = new SettingsView(this.transitioner, 
                                     this.restoreUrlView.bind(this));
         this.urlSettingsDialog = new UrlSettingsDialog(this.transitioner,
+                                    this.editItem.bind(this),
                                     this.deleteItem.bind(this));
         this.browserHistoryManager = new BrowserHistoryManager(this);
 
@@ -27,8 +28,8 @@ LoaderApp.prototype = {
         this.appendUrlButton.onAndroidTap(this.requestAppendUrl.bind(this));
     },
     requestAppendUrl: function(){
-        this.appendUrlDialog.showAppendUrlDialog(this.appendUrl.bind(this))
-        this.browserHistoryManager.toAppendUrlDialog();
+        this.createUrlDialog.showCreateUrlDialog(this.appendUrl.bind(this))
+        this.browserHistoryManager.toCreateUrlDialog();
     },
     appendUrl: function(url){
         if (url !== undefined){
@@ -55,7 +56,7 @@ LoaderApp.prototype = {
         urlButton.addClass('androidButton');
         listItem.append(urlButton);
         var callGotoUrl = function(){
-            this.gotoUrl(url);
+            this.gotoUrl(urlButton.text());
         };
         var callUrlSettings = function(){
             this.urlSettingsDialog.showUrlSettingsDialog(listItem);
@@ -76,10 +77,25 @@ LoaderApp.prototype = {
     	cordova.exec(function(winParam) {}, function(error) {}, "Loader",
                 "load", [url]);
     },
-    deleteItem: function(item){
+    listItemToHistoryIndex: function(item){
         var index = item.index();
         var size = item.parent().find('li').size() - 1;
-        this.savedHistory.removeIndexFromHistory(size - index - 1);
+        return size - index - 1;
+    },
+    editItem: function(item){
+        setTimeout(function(){
+            var button = item.children();
+            this.browserHistoryManager.toCreateUrlDialog();
+            this.createUrlDialog.showCreateUrlDialog(function(url){
+                button.text(url);
+                var index = this.listItemToHistoryIndex(item);
+                this.savedHistory.editUrlInHistory(index, url);
+            }.bind(this), button.text());
+        }.bind(this), 250);
+    },
+    deleteItem: function(item){
+        var index = this.listItemToHistoryIndex(item);
+        this.savedHistory.removeIndexFromHistory(index);
         this.transitioner.removeListItem(item);
     },
     addHistory: function() {

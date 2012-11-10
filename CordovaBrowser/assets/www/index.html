@@ -17,7 +17,7 @@
     <script src="libs/UTIL.js"></script>
     <script src="libs/Transitioner.js"></script>
     <script src="js/SavedHistory.js"></script>
-    <script src="js/AppendUrlDialog.js"></script>
+    <script src="js/CreateUrlDialog.js"></script>
     <script src="js/UrlSettingsDialog.js"></script>
     <script src="js/SettingsView.js"></script>
     <script src="js/BrowserHistoryManager.js"></script>
@@ -64,12 +64,13 @@
         </div>
 
     </div>
-    <div id="appendUrlDialog" class="dialog up">
-        <input id="appendUrlInput" type="text" placeholder="url" autocorrect="off" autocomplete="off" autocapitalize="off"/>
-        <button id="appendUrlCancel" class="androidButton"> cancel </button>
+    <div id="createUrlDialog" class="dialog up">
+        <input id="createUrlInput" type="text" placeholder="url" autocorrect="off" autocomplete="off" autocapitalize="off"/>
+        <button id="createUrlCancel" class="androidButton"> cancel </button>
     </div>
     <div id="urlSettingsDialog" class="dialog up">
         <button id="deleteUrl" class="androidButton androidDeleteButton"> delete </button>
+        <button id="editUrl" class="androidButton"> edit </button>
         <button id="cancelUrlSettings" class="androidButton"> cancel </button>
     </div>
 </body>

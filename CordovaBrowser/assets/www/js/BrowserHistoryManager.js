@@ -1,7 +1,7 @@
 var BrowserHistoryManager = function(loaderApp){
     window.onpopstate = function(event) {
-        if (event.state.toRevert === 'hideAppendUrlDialog'){
-            loaderApp.appendUrlDialog.hideAppendUrlDialog();
+        if (event.state.toRevert === 'hideCreateUrlDialog'){
+            loaderApp.createUrlDialog.hideCreateUrlDialog();
         }
         else if (event.state.toRevert === 'hideUrlSettingsDialog'){
             loaderApp.urlSettingsDialog.hideUrlSettingsDialog();
@@ -13,10 +13,10 @@ var BrowserHistoryManager = function(loaderApp){
 }
 
 BrowserHistoryManager.prototype = {
-    toAppendUrlDialog: function(){
-        window.history.replaceState({'toRevert': 'hideAppendUrlDialog' }, 
+    toCreateUrlDialog: function(){
+        window.history.replaceState({'toRevert': 'hideCreateUrlDialog' }, 
                                     document.title, location.href);
-        window.history.pushState('appendUrlView', document.title, location.href);
+        window.history.pushState('createUrlView', document.title, location.href);
     },
     toUrlSettingsDialog: function(){
         window.history.replaceState({'toRevert': 'hideUrlSettingsDialog' }, 

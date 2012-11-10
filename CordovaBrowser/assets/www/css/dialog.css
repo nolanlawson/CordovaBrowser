@@ -18,12 +18,17 @@
     margin-right: auto;
 }
 
-#appendUrlCancel {
+#createUrlCancel {
     float: right;
     margin-top: .5em;
 }
 
 #deleteUrl {
+    width: 100%;
+    margin-bottom: .5em;
+}
+
+#editUrl {
     width: 100%;
     margin-bottom: .5em;
 }

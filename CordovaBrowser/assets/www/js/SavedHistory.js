@@ -10,6 +10,11 @@ SavedHistory.prototype = {
             window.localStorage.cordovaBrowserHistory = JSON.stringify([]);
         }
     },
+    editUrlInHistory: function(index, url){
+        var history = JSON.parse(window.localStorage.cordovaBrowserHistory);
+        history[index] = url;
+        window.localStorage.cordovaBrowserHistory = JSON.stringify(history);
+    },
     addUrlToHistory: function(url){
         var history = JSON.parse(window.localStorage.cordovaBrowserHistory);
         history.push(url);
