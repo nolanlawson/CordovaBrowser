@@ -25,7 +25,6 @@ LoaderApp.prototype = {
         this.urlView = $('#urls');
         this.appendUrlButton = $('#appendUrl');
         this.appendUrlButton.onAndroidTap(this.requestAppendUrl.bind(this));
-        this.iframe = $('#browser');
     },
     requestAppendUrl: function(){
         this.appendUrlDialog.showAppendUrlDialog(this.appendUrl.bind(this))
