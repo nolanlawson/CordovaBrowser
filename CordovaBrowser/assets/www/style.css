@@ -5,7 +5,7 @@
 }
 
 input {
-    -webkit-user-select: auto;
+    -webkit-user-select: text;
 }
 
 #content {
