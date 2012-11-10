@@ -58,7 +58,8 @@ public class CordovaBrowserActivity extends DroidGap {
 
 	private void toastConsoleMessage(String message, int lineNumber, String sourceID){
 		if (message != null && sourceID != null &&
-				!message.contains("JSCallback Error: Request failed with status 0")){
+				!message.contains("JSCallback Error: Request failed with status 0") &&
+				sourceID.length() != 0){
 			Toast.makeText(this,
 					sourceID + ": Line " + lineNumber + " : " + message, 
 					Toast.LENGTH_SHORT).show();
@@ -71,13 +72,6 @@ public class CordovaBrowserActivity extends DroidGap {
 		CordovaWebViewClient webViewClient;
 		webViewClient = new CordovaWebViewClient(this, webView);
 		this.init(webView, webViewClient, new CordovaChromeClient(this, webView){
-			@Override
-			public void onConsoleMessage(String message, int lineNumber, String sourceID){
-				toastConsoleMessage(message, lineNumber, sourceID);
-				super.onConsoleMessage(message, lineNumber, sourceID);
-			}
-
-			@TargetApi(8)
 			@Override
 			public boolean onConsoleMessage(ConsoleMessage consoleMessage){
 				toastConsoleMessage(consoleMessage.message(),
