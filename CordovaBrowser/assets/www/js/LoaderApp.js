@@ -100,8 +100,10 @@ LoaderApp.prototype = {
     },
     addHistory: function() {
         var history = this.savedHistory.getHistory();
-        for (var i = 0; i < history.length; i++){
-            this.addUrlToView(history[i]);
+        if (history !== undefined){
+            for (var i = 0; i < history.length; i++){
+                this.addUrlToView(history[i]);
+            }
         }
     }
 }
