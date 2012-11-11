@@ -1,12 +1,13 @@
 package com.eas.cordova.browser;
 
-import android.annotation.TargetApi;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Html;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.webkit.ConsoleMessage;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import org.apache.cordova.CordovaChromeClient;
@@ -56,13 +57,26 @@ public class CordovaBrowserActivity extends DroidGap {
 		return true;
 	}
 
+	private boolean mightBeError(String message){
+		return message.contains("Error");
+	}
+
 	private void toastConsoleMessage(String message, int lineNumber, String sourceID){
 		if (message != null && sourceID != null &&
 				!message.contains("JSCallback Error: Request failed with status 0") &&
 				sourceID.length() != 0){
-			Toast.makeText(this,
+			Toast toast = Toast.makeText(this,
 					sourceID + ": Line " + lineNumber + " : " + message, 
-					Toast.LENGTH_SHORT).show();
+					Toast.LENGTH_SHORT);
+			if (mightBeError(message)){
+				toast.setDuration(Toast.LENGTH_LONG);
+				TextView msg = (TextView) toast.getView().findViewById(android.R.id.message);
+				String html = msg.getText().toString().replace(
+							"Error", 
+							"<font color='#EE0000'>Error</font>");
+				msg.setText(Html.fromHtml(html));
+			}
+			toast.show();
 		}
 	}
 
