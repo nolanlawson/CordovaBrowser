@@ -1,8 +1,15 @@
 package com.eas.cordova.browser;
 
+import org.apache.cordova.CordovaChromeClient;
+import org.apache.cordova.CordovaWebView;
+import org.apache.cordova.CordovaWebViewClient;
+import org.apache.cordova.DroidGap;
+
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Html;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -10,10 +17,7 @@ import android.webkit.ConsoleMessage;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.apache.cordova.CordovaChromeClient;
-import org.apache.cordova.CordovaWebView;
-import org.apache.cordova.CordovaWebViewClient;
-import org.apache.cordova.DroidGap;
+import com.eas.cordova.browser.sqlite.R;
 
 public class CordovaBrowserActivity extends DroidGap {
 	/** Called when the activity is first created. */
@@ -86,13 +90,19 @@ public class CordovaBrowserActivity extends DroidGap {
 		CordovaWebViewClient webViewClient;
 		webViewClient = new CordovaWebViewClient(this, webView);
 		this.init(webView, webViewClient, new CordovaChromeClient(this, webView){
-			@Override
+			@SuppressLint("NewApi")
+            @Override
 			public boolean onConsoleMessage(ConsoleMessage consoleMessage){
-				toastConsoleMessage(consoleMessage.message(),
-						consoleMessage.lineNumber(),
-						consoleMessage.sourceId());
+				Log.d("CordovaSqliteBrowser", consoleMessage.message());
 				return super.onConsoleMessage(consoleMessage);
 			}
+
+            @Override
+            public void onConsoleMessage(String message, int lineNumber, String sourceID) {
+                super.onConsoleMessage(message, lineNumber, sourceID);
+                Log.d("CordovaSqliteBrowser", message);
+            }
+			
 		});
 	}
 }

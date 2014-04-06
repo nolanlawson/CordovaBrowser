@@ -33,7 +33,7 @@
         android:icon="@drawable/cordova"
         android:label="@string/app_name" >
         <activity
-            android:name="CordovaBrowserActivity"
+            android:name="com.eas.cordova.browser.CordovaBrowserActivity"
             android:label="@string/app_name"  android:configChanges="orientation|keyboardHidden">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

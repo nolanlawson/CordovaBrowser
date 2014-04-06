@@ -22,10 +22,12 @@
     <script src="js/SettingsView.js"></script>
     <script src="js/BrowserHistoryManager.js"></script>
     <script src="js/LoaderApp.js"></script>
-
+    <script src="js/SQLitePlugin.js"></script>
+    
     <title>Cordova Browser</title>
     <script>
         document.addEventListener('deviceready', function() {
+            console.log('sqlite plugin enabled?: ' + !!window.sqlitePlugin);
             window.launch();
         });
 
