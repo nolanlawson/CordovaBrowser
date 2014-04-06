@@ -27,6 +27,7 @@
     <title>Cordova Browser</title>
     <script>
         document.addEventListener('deviceready', function() {
+            console.log('cordova enabled?: ' + !!window.cordova);
             console.log('sqlite plugin enabled?: ' + !!window.sqlitePlugin);
             window.launch();
         });

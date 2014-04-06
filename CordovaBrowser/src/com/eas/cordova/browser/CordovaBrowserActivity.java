@@ -1,5 +1,11 @@
 package com.eas.cordova.browser;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
+import java.io.UnsupportedEncodingException;
+
 import org.apache.cordova.CordovaChromeClient;
 import org.apache.cordova.CordovaWebView;
 import org.apache.cordova.CordovaWebViewClient;
@@ -7,6 +13,7 @@ import org.apache.cordova.DroidGap;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.text.Html;
 import android.util.Log;
@@ -14,6 +21,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.webkit.ConsoleMessage;
+import android.webkit.WebView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -88,7 +96,48 @@ public class CordovaBrowserActivity extends DroidGap {
 	public void init() {
 		CordovaWebView webView = new CordovaWebView(this);
 		CordovaWebViewClient webViewClient;
-		webViewClient = new CordovaWebViewClient(this, webView);
+		webViewClient = new CordovaWebViewClient(this, webView){{
+		    
+		    
+		    
+		}
+
+        @Override
+        public void onPageStarted(WebView view, String url, Bitmap favicon) {
+            super.onPageStarted(view, url, favicon);
+            Log.d("CordovaSqliteBrowser", "url started: "+ url);
+            if (!url.startsWith("http")) {
+                Log.d("CordovaSqliteBrowser", "skipping url " + url);
+                return;
+            }
+            Log.d("CordovaSqliteBrowser", "loading cordova/sqlite plugin");
+            /*try {
+                String cordova = Utils.slurp(getAssets().open("www/libs/cordova.min.js"), 0x1000);
+                String sqlite = Utils.slurp(getAssets().open("www/js/SQLitePlugin.min.js"), 0x1000);
+                view.loadUrl("javascript:" + cordova);
+                view.loadUrl("javascript:" + sqlite);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }*/
+            view.loadUrl("javascript:console.log('do we have cordova ' + !!window.cordova);");
+            view.loadUrl("javascript:console.log('do we have sqlite ' + !!window.sqlitePlugin);");
+            view.loadUrl("javascript:console.log('do we have pouchdb ' + !!window.PouchDB);");
+        }
+
+        @Override
+        public void onPageFinished(WebView view, String url) {
+            super.onPageFinished(view, url);   
+            Log.d("CordovaSqliteBrowser", "url ended: "+ url);
+        }
+
+        @Override
+        public boolean shouldOverrideUrlLoading(WebView view, String url) {
+            // TODO Auto-generated method stub
+            return super.shouldOverrideUrlLoading(view, url);
+        }
+        
+        
+		};
 		this.init(webView, webViewClient, new CordovaChromeClient(this, webView){
 			@SuppressLint("NewApi")
             @Override
@@ -105,4 +154,8 @@ public class CordovaBrowserActivity extends DroidGap {
 			
 		});
 	}
+	
+
+	
+	
 }
